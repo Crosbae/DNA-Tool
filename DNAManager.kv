@@ -1,0 +1,64 @@
+#kivy.require("1.9.0")
+<Button>:
+    background_color: 0.5,1,1,0.5
+
+<WindowLayout>:
+    SeqInput:
+        id: SeqInput
+        size_hint: (1, 0.25)
+        hint_text: "5' ---> 3'"
+        multiline: True
+        font_size: "20"
+        pos_hint: {"x":0, "top":1}
+        text: ""
+    Label:
+        id: Submission
+        text: ""
+        size_hint: (0.9,0.8)
+        pos_hint: {"left": 1, "top":0.7}
+        font_size: "10"
+    Label:
+        size_hint: (0.5, 0.1)
+        text: "This is your DNA manager. Enter sequence above and alter it by choosing one of the options below."
+        multiline:True
+        font_size: "15"
+        pos_hint: {"center_x":0.5, "top":0.75}
+
+    Button:
+        size_hint: (0.4, 0.2)
+        text: "Submit Query Sequence"
+        font_size: "20"
+        pos_hint: {"center_x":0.25, "top":0.65}
+        on_release: root.Entry = SeqInput.text
+        on_release: Submission.text = SeqInput.text
+    Button:
+        size_hint: (0.4, 0.2)
+        text: "Reverse Sequence"
+        font_size: "20"
+        pos_hint: {"center_x":0.75, "top":0.65}
+        on_release: SeqInput.text = "".join(reversed(SeqInput.text.upper()))
+
+    Button:
+        size_hint: (0.4, 0.2)
+        text: "Complement Sequence"
+        font_size: "20"
+        pos_hint: {"center_x":0.25, "top":0.45}
+        on_release: SeqInput.text = root.Complement(SeqInput.text)
+    Button:
+        size_hint: (0.4, 0.2)
+        text: "Reverse Complement"
+        font_size: "20"
+        pos_hint: {"center_x":0.75, "top":0.45}
+        on_release: SeqInput.text = "".join(reversed(root.Complement(SeqInput.text.upper())))
+    Button:
+        size_hint: (0.4, 0.2)
+        text: "Replace Unknown Nucleotides"
+        font_size: "20"
+        pos_hint: {"center_x":0.25, "top":0.25}
+        on_release:
+    Button:
+        size_hint_y: None
+        text: "N"
+        font_size: "20"
+        pos_hint: {"center_x":0.25, "top":0.25}
+        on_release:
